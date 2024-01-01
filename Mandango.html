@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Booking</title>
+    <script type="text/javascript">
+        var seats=[false,true,false,true,true,true,false,true,false];
+        
+
+        function findseat(){
+            for(var i=0;i<seats.length;i++){
+                if(seats[i] && seats[i+1] && seats[i+2]){
+                    selSeat=i;
+                    document.getElementById("seat"+(i+3)).src="./assets/seat_select.png";
+                    document.getElementById("seat"+(i+3)).alt="Your Seat";
+                    document.getElementById("seat"+(i+1)).src="./assets/seat_select.png";
+                    document.getElementById("seat"+(i+1)).alt="Your Seat";
+                    document.getElementById("seat"+(i+2)).src="./assets/seat_select.png";
+                    document.getElementById("seat"+(i+2)).alt="Your Seat";
+                    var accept=confirm("Seat "+(i+1)+", "+(i+2)+"and "+(i+3)+" is avaiable. Accept?");
+                    if(accept){
+                        break;
+                    }
+                    else{
+                        selSeat=-1;
+                        document.getElementById("seat"+i).src="./assets/seat_avail.png";
+                        document.getElementById("seat"+i).alt="Available Seat";
+                    }
+                }
+            }
+        }
+        var showTime=new Array();
+
+    </script>
+
+    <style>
+        .findseat{
+            border-radius: 8px;
+            margin: 25px 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body >
+    <img id="seat1" src="assets/seat_unavail.png" alt="unavailable" >
+    <img id="seat2"  src="assets/seat_avail.png" alt="available" >
+    <img id="seat3"  src="assets/seat_unavail.png" alt="unavailable" >
+    <img id="seat4"  src="assets/seat_avail.png" alt="available" >
+    <img id="seat5"  src="assets/seat_avail.png" alt="available" >
+    <img id="seat6"  src="assets/seat_avail.png" alt="available" >
+    <img id="seat7"  src="assets/seat_unavail.png" alt="unavailable" >
+    <img id="seat8"  src="assets/seat_avail.png" alt="available" >
+    <img id="seat9"  src="assets/seat_unavail.png" alt="unavailable" >
+    <br>
+    <input type="button" value="find seat" id="findseat" onclick="findseat();">
+ <br>
+
+    
+</html>

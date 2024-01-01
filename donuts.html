@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duncan's just-in-time Donuts</title>
+    <style>
+        h1,h3{
+            text-align: center;
+        }
+        img{
+            margin-top: 100px;
+            margin-left: 20px;
+            float: left;
+        }
+        #info{
+            margin-top:100px ;
+            margin-left: 300px;
+            font-size: 1.8em;
+            padding-top: 20px;
+        }
+        input{
+            font-size: 1.0em;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+    </style>
+    <script type="text/javascript">
+        function updateOrder(){
+            const TAXRATE=0.15;
+            const DONUTPRICE=0.5;
+            var numCakeDonuts=parseDonuts(document.getElementById("cakedonuts").value);
+            var numGlazeDonuts=parseDonuts(document.getElementById("glazeddonuts").value);
+            if(isNaN(numCakeDonuts))
+                numCakeDonuts=0;
+            
+            if(isNaN(numGlazeDonuts))
+                numGlazeDonuts=0;
+            
+            var subTotal=(numCakeDonuts+numGlazeDonuts)*DONUTPRICE;
+            var tax=subTotal*TAXRATE;
+            var total=subTotal+tax;
+            document.getElementById("subtotal").value="$" +subTotal.toFixed(2);
+            document.getElementById("tax").value="$" +tax.toFixed(2);
+            document.getElementById("total").value="$" +total.toFixed(2);
+        }
+        function placeOrder(){
+            if(document.getElementById("name").value=="")
+                alert("I am sorry! but you have to submit your name first");
+            
+            else if(isNaN(document.getElementById("pickupminutes").value) || (document.getElementById("pickupminutes").value)=="")
+                alert("Please enter a valid NUMBER in Minutes till pickup column");
+            
+            else
+                form.submit();
+            
+        }
+        function parseDonuts(donutString){
+            numDonuts=parseInt(donutString);
+            if(donutString.indexOf("dozen")!=-1)
+                numDonuts*=12;
+            
+            return numDonuts;
+        }
+    </script>
+</head>
+<body>
+    <h1>Duncan's just-in-time Donuts</h1>
+    <h3>All Donuts 50 cents each, cake or glazed!</h3>
+    <img src="./assets/donuttime.png" alt="Donuts" width="250px" height="200px">
+    <div id="info">
+        <form action="">
+            <label for="Name">Name</label>
+            <input type="text" name="Name" id="name"><br><br>
+            <label for="Cake_Donuts"># of Cake Donuts</label>
+            <input type="text" name="Cake_Donuts" id="cakedonuts" value="" onchange="updateOrder()"><br><br>
+            <label for="Glazed_Donuts"># of Glazed Donuts</label>
+            <input type="text" name="Glazed_Donuts" id="glazeddonuts" value="" onchange="updateOrder()"><br><br>
+            <label for="pickup">Minutes till pickup</label>
+            <input type="text" name="pickup" id="pickupminutes"><br><br>
+            <label for="subtotal">Subtotal</label>
+            <input type="text" name="subtotal" id="subtotal"><br><br>
+            <label for="tax">Tax</label>
+            <input type="text" name="tax" id="tax"><br><br>
+            <label for="total">Total</label>
+            <input type="text" name="total" id="total"><br><br>
+            <input name="form" type="submit" value="Place Order" onclick="placeOrder(this.form)"/>
+
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descision Making</title>
+    <script type="text/javascript">
+        var curScene=0;
+        function changeScene(option){
+            var message="";
+            switch(curScene){
+            case 0:
+                curScene=1;
+                message="Your journey begins at fork in the road.";
+                break;
+            case 1:
+                if(option==1){
+                    curScene=2;
+                    message="Little House in the woods.";
+                }
+                else{
+                    curScene=3;
+                    message="Bridge overlooking stream.";
+                }
+                break;
+            case 2:
+                if(option==1){
+                    curScene=4;
+                    message="Witch in window.";
+                }
+                else{
+                    curScene=5;
+                    message="Eaten by witch THE END.";
+                }
+                break;
+            case 3:
+                if(option==1){
+                    curScene=6;
+                    message="Eaten by troll THE END.";
+                }
+                else{
+                    curScene=7;
+                    message="Troll on bridge.";
+                }
+                break;
+            case 4:
+                if(option==1){
+                curScene=8;
+                message="To be continued...";
+                }
+                else{
+                    curScene=5;
+                    message="Eaten by witch THE END.";
+                }
+                break;
+            case 5:
+                if(option==1){
+                curScene=9;
+                message="To be continued...";
+                }
+                else{
+                    curScene=6;
+                    message="Eaten by troll THE END.";
+                }
+                break;
+            case 6:
+                if(option==1){
+                    curScene=1;
+                    message="Fork in road";
+                }
+                else{
+                    curScene=2;
+                    message="Little house in the woods."
+                }
+                break;
+            case 7:
+                if(option==1){
+                    curScene=1;
+                    message="Fork in road";
+                }
+                else{
+                    curScene=2;
+                    message="Little house in the woods."
+                }
+                break;
+            case 8:
+                curScene=0;
+                break;
+            case 9:
+                curScene=0;
+                break;
+            }
+            
+            document.getElementById("mainimg").src="./assets/scene"+curScene+".png";
+            if(message!=""){
+                alert(message);
+            }
+            else{
+                alert("Sorry You have been finished.")
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="margin-top:100px; text-align:center">
+        <img id="mainimg" src="./assets/scene0.png" alt="scene0" ><br>
+        Please Choose:
+        <input type="button" id="decision1" value="1" onclick="changeScene(1)">
+        <input type="button" id="decision2" value="2" onclick="changeScene(2)">
+    </div>
+</body>
+</html>

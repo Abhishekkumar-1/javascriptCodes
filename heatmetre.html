@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function ShowTemperature(){
+        var temp=document.getElementById("inptemp").value;
+        if(!isNaN(temp)){
+            alert(temp);
+        }
+        else{
+            alert("Please enter a number");
+        }
+        if(temp>=37){
+            alert("It's a sunny day");
+            document.getElementById("weathers").src="./assets/SunnyWeather.jpg";
+        }
+        else if(temp<37 && temp>=22){
+            alert("It's a Sunny Cloudy weather");
+            document.getElementById("weathers").src="./assets/SunnyCloudyWeather.png";
+        }
+        else if(temp<22 && temp>=15){
+            alert("It's a Rainy weather");
+            document.getElementById("weathers").src="./assets/RainyDay.jpg";
+        }
+        else if(temp<15){
+            alert("It's a Stormy weather");
+            document.getElementById("weathers").src="./assets/StormyWeather.png";
+        }
+    }
+
+    </script>
+
+    <style>
+        #weathers{
+            padding-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label for="tempo" id="inputtemp">What is the temperature:</label>
+        <input type="text" id="inptemp" required>
+        <input type="button" value="shoe weather" id="showweather" onclick="ShowTemperature();">
+    </form>
+    <div id="division1">
+        <img src=".\assets\WeatherNull.jpg" alt="WeatherNull" id="weathers">
+    </div>
+
+</body>
+</html>

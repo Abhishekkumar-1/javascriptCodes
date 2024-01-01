@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision Making</title>
+</head>
+
+<style>
+    .mid_container{
+        margin-top:100px;
+         text-align:center
+    }
+    #mainimg{
+        border:solid 3px red;
+    }
+    .decision{
+        font-weight: bold;
+        border: thin solid #000000;
+        /* padding: 1px; */
+        background-color: #DDDDDD;
+        margin: 5px;
+        cursor: pointer;
+    }
+    .decisionhover{
+        font-weight: bold;
+        border: thin solid #000000;
+        /* padding: 5px; */
+        margin: 5px;
+        background-color: #9eee9f;
+        cursor: pointer;
+
+    }
+
+</style>
+
+<script type="text/javascript">
+    var curScene=0;
+
+    function replaceNode(id,text){
+        var node=document.getElementById(id);
+        while(node.firstChild){
+            node.removeChild(node.firstChild);
+        }
+        node.appendChild(document.createTextNode(text));
+    }
+    
+    function changeScene(option){
+        var message="";var decision1="";var decision2="";
+        switch(curScene){
+            case 0:
+                curScene=1;
+                message="Journey begins at fork of the road";
+                decison1="Take the road";
+                decision2="Take the bridge";
+                document.getElementById('decision2').style.visibility="visible";
+                break;
+            case 1:
+                if(option==1){
+                    curScene=2;
+                    message="You have arrived at a cute little house in the woods.";
+                    decision1 = "Walk around Back";
+                    decision2 = "Knock on Door";
+                }
+                else{
+                    curScene=3;
+                    message="You are standing on the bridge overlooking a peaceful stream.";
+                    decision1 = "Walk across Bridge";
+                    decision2 = "Gaze into Stream";
+                }
+                break;
+            case 2:
+                if(option==1){
+                    curScene=4;
+                    message="Peeking through the window, you see a witch inside the house.";
+                    decision1 = "Sneak by Window";
+                    decision2 = "Wave at Witch";
+                }
+                else{
+                    curScene=5;
+                    message="Sorry, a witch lives in the house and you just became part of her stew.";
+                    decision1 = "Start Over";
+                    decision2 = "";
+                    document.getElementById('decision2').style.visibility="hidden"
+                }
+                break;
+            case 3:
+                if(option==1){
+                    curScene=6;
+                    message="Sorry, a troll lives on the other side of the bridge and you just became his lunch.";
+                    decision1 = "Start Over";
+                    decision2 = "";
+
+                    // Hide the second decision
+                    document.getElementById("decision2").style.visibility = "hidden";
+                }
+                else{
+                    curScene=7;
+                    message = "Your stare is interrupted by the arrival of a huge troll.";
+                    decision1 = "Say Hello to Troll";
+                    decision2 = "Jump into Stream";
+                }
+                break;
+            case 4:
+                if(option==1){
+                    curScene=8;
+                    message="To be continued...";
+                    decision1 = "?";
+                    decision2 = "?";
+                }
+                else{
+                    curScene=5;
+                    message = "Sorry, you became part of the witch's stew.";
+                    decision1 = "Start Over";
+                    decision2 = "";
+                    document.getElementById("decision2").style.visibility = "hidden";
+                }
+                break;
+            case 5:
+                curScene = 0;
+                decision1 = "Start Game";
+                decision2 = "";
+                break;
+
+            case 6:
+                curScene = 0;
+                decision1 = "Start Game";
+                decision2 = "";
+                break;
+
+            case 7:
+                if(option==1){
+                    curScene=1;
+                    message = "Sorry, you became the troll's tasty lunch.";
+                    decision1 = "Start Over";
+                    decision2 = "";
+
+                    // Hide the second decision
+                    document.getElementById("decision2").style.visibility = "hidden";
+
+                }
+                else{
+                    curScene=2;
+                    // message="Little house in the woods."
+                    decision1 = "?";
+                    decision2 = "?";
+                }
+                break;
+            case 8:
+                curScene=0;
+                break;
+            case 9:
+                curScene=0;
+                break;
+            }
+        // console.log(decision1+" "+decision1)
+        document.getElementById("mainimg").src="./assets/scene"+curScene+".png";
+        replaceNode("imgexplain",message)
+        replaceNode("decision1",decision1)
+        replaceNode("decision2",decision2)
+        document.getElementById("mainimg").alt=message;
+
+        var history=document.getElementById("history");
+        if(curScene!=0){
+            var decisionElem=document.createElement("p")
+            decisionElem.appendChild(document.createTextNode("Decision "+
+            option + " -> Scene "+curScene+" : "+ message))
+            history.appendChild(decisionElem);
+        }else{
+            while(history.firstChild){
+                history.removeChild(history.firstChild);
+            }
+        }
+
+    }
+
+</script>
+
+<body>
+    <div class="mid_container">
+        <img id="mainimg" src="./assets/scene0.png" alt="Journey begins">
+        <div>
+            <span id="imgexplain"></span>
+            <div>
+                <span id="decision1" class="decision" onclick="changeScene(1)"
+                onmouseover="this.className='decisionhover' "
+                onmouseout="this.className='decison'">
+                Start
+                </span>
+                <span id="decision2" class="decision" onclick="changeScene(2)"
+                onmouseover="this.className='decisionhover'"
+                onmouseout="this.className='decision'" style="visibility: hidden;">
+                </span>
+            </div>
+        </div>
+        <div id="history" style="background-color:#EEEEEE"></div>
+
+    </div>
+</body>
+</html>

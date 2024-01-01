@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For-validation</title>
+    <style>
+        /* h1,h3{
+            text-align: center;
+        } */
+        /* img{
+            margin-top: 100px;
+            margin-left: 20px;
+            float: left;
+        } */
+        #info{
+            margin-top:10px ;
+            margin-left: 30px;
+            font-size: 1.8em;
+            padding-top: 20px;
+        }
+        input{
+            font-size: 1.0em;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        .help{
+            font-size: 0.7em;
+            color: red;
+        }
+        </style>
+
+        <script type="text/javascript">
+            function validate(inputfield,helptext){
+                if(inputfield.value.length===0){
+                    // alert("Please enter a valid input in "+ inputfield.name);
+                    if(helptext!=null){
+                        helptext.innerHTML="Please enter a valid input";
+                    }
+                    return false;
+                }
+                else{
+                    if(helptext!=null){
+                        helptext.innerHTML="";
+                    }
+                    return true;
+                }
+            }
+
+            function validatelength(minlength,maxlength,inputfield,helptext){
+                var regex=/^\d{3}-\d{3}-\d{4}$/
+                if(!regex.test(inputfield.value)){
+                    if(helptext!=null){
+                        helptext.innerHTML="Please enter text in proper format characters";
+                    }
+                    return false;
+                }else{
+                    if(helptext!=null){
+                        helptext.innerHTML="";
+                    }
+                    return true;
+                }
+            }
+
+            function validateCode(perfectlength,inputfield,helptext){
+                if(inputfield.value.length!=perfectlength){
+                    if(helptext!=null){
+                        helptext.innerHTML="Please enter "+perfectlength+" characters zipcode";
+                    }
+                    return false;
+                }
+                else if(isNaN(inputfield.value)){
+                    if(helptext!=null){
+                        helptext.innerHTML="Please enter number";
+                    }
+                    return false;
+                }else{
+                    if(helptext!=null){
+                        helptext.innerHTML="";
+                    }
+                    return true;
+                }
+            }
+
+            function verifyall(form){
+                if(validateCode(6,form["zip"],form["help_code"]) && validatelength(1,32,form["phone"],form["help_number"]) && 
+                validate(form["name"],form["help_name"])){
+                    // form["zip"].value="";form["name"].value="";form["phone"].value="";form["email"].value="";                
+                    // alert('form submitted');
+                    form.submit();    
+                }
+                alert('Some fields are not filled properly!😞😞😞😞')
+            }
+
+            function validateDate(inputDate,help_date){
+                var regex=/^\d{2}\/\d{2}\/(\d{2}|\d{4})$/;
+                    if(!regex.test(inputDate.value)){
+                        if(help_date!=null){
+                            help_date.innerHTML="Please enter date in correct format";
+                        }
+                        return false;
+                    }
+                else{
+                    if(help_date!=null ){
+                        help_date.innerHTML="";
+                    }
+                    return true;
+                }
+            }
+
+        </script>
+</head>
+
+<body>
+
+    <div id="info">
+        <form action="">
+            <label for="Name">Enter your Name</label>
+            <input type="text" name="MyName" id="name" onblur="validate(this,document.getElementById('help_name'));"><br><br>
+            <span id="help_name" class="help"></span>
+            <label for="Name">Enter your Phone number</label>
+            <input type="text" name="phone" id="phone" onblur="validatelength(1,32,this,document.getElementById('help_number'))"><br><br>
+            <span id="help_number" class="help"></span>
+            <label for="Name">Enter your E-mail</label>
+            <input type="email" name="email" id="email"><br><br>
+            <label for="zipcode">Enter your Zipcode</label>
+            <input type="text" name="zip" id="zip" onblur="validateCode(6,this,document.getElementById('help_code'))"><br><br>
+            <span id="help_code" class="help"></span>
+            <label for="date">Enter date</label>
+            <input type="text" name="date" id="date" placeholder="dd/mm/yyyy" onblur="validateDate(this,document.getElementById('help_date'))"><br><br>
+            <span id="help_date" class="help"></span>
+            <input type="button" value="submit" name="submit" id="submit" onclick="verifyall(this.form)">
+        </form>
+    </div>
+    
+</body>
+</html>
+<!-- 312 -->
