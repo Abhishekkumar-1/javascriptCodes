@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cube Puzzlers</title>
+    <script type="text/javascript" src="object.js"></script>
+</head>
+<body onload="showBlog(2)">
+    <h3>YouCube - The blog for Cube Puzzlers</h3>
+    <img src="./assets/cube.png" alt="Cube">
+    <div>
+    <p id="searchresult" style="visibility:hidden"></p>
+    <input type="button" id="searchblog" value="Search the Blog" onclick="searchBlog()" placeholder="Enter the text">
+    <input type="text" name="searchtext" id="searchtext" value=""
+    onclick="hideP()">
+    </div>
+    <div id="blog"></div>
+    <input type="button" id="showall" value="Show all blog entries"
+    onclick="showBlog()">
+    <input type="button" id="showrandom" value="Show random blog"
+    onclick="randomBlog()">
+</body>
+</html>
